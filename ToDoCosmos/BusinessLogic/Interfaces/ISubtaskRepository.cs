@@ -8,11 +8,11 @@ using ToDoCosmos.BusinessLogic.Models;
 
 namespace ToDoCosmos.BusinessLogic.Interfaces
 {
-    public interface IUStoryRepository
+    public interface ISubtaskRepository
     {
-        Task AddAsync(UserStory story);
-        Task<UserStory> GetByIdAsync(Guid Id);
-        Task<IEnumerable<UserStory>> GetAllStoriesAsync();
-        Task UpdateAsync(UserStory story);
+        Task AddAsync(Subtask subtask);
+        Task<Subtask> GetByIdAsync(Guid Id);
+        Task<IEnumerable<Subtask>> GetAllSubtasksAsync();
+        Task UpdateAsync(Subtask subtask);
     }
 }

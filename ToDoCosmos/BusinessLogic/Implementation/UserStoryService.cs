@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoCosmos.BusinessLogic.Exceptions;
 using ToDoCosmos.BusinessLogic.Interfaces;
 using ToDoCosmos.BusinessLogic.Models;
 using ToDoCosmos.Domain;
@@ -25,10 +26,7 @@ namespace ToDoCosmos.BusinessLogic.Implementation
             {
                 Id = Guid.NewGuid(),
                 Name = storyDto.Name,
-                Description = storyDto.Description,
-                Assignee = storyDto.Assignee,
-                Subtasks = storyDto.Subtasks,
-                Status = storyDto.Status,
+                Description = storyDto.Description
 
             };
             await _repository.AddAsync(story);
@@ -39,22 +37,24 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
        public async Task<IEnumerable<UserStory>> GetAllStoriesAsync()
         {
-            return await _repository.GetAllStoriesAsync();
+            var stories = await _repository.GetAllStoriesAsync();
+            if (stories == null)
+            {
+                throw new JiraNotFoundException();
+            }
+            return stories;
         }
 
-      public  async Task<IEnumerable<UserStory>> GetAllDoneStoriesAsync()
-        {
-            return await _repository.GetAllDoneStoriesAsync();
-        }
+    
 
     public async Task<UserStory> GetStoryByIdAsync(Guid storyid)
         {
+            var story = await _repository.GetByIdAsync(storyid);
 
-            var stories = await _repository.GetAllStoriesAsync();
-            var story = stories.FirstOrDefault(x => x.Id == storyid);
-
-
-
+            if (story is null)
+            {
+                throw new JiraNotFoundException();
+            }
             return story;
 
         }
@@ -64,7 +64,12 @@ namespace ToDoCosmos.BusinessLogic.Implementation
             var stories = await _repository.GetAllStoriesAsync();
             var story = stories.FirstOrDefault(x => x.Id == storyid);
 
-            story.Status = "";
+            if (story is null)
+            {
+                throw new JiraNotFoundException();
+            }
+
+            story.Status = status;
 
             await _repository.UpdateAsync(story);
         }
@@ -74,11 +79,14 @@ namespace ToDoCosmos.BusinessLogic.Implementation
           
             var story = await _repository.GetByIdAsync(storyDto.Id);
 
-            story.Status = storyDto.Status;
-            story.Name = storyDto.Status;
+            if (story is null)
+            {
+                throw new JiraNotFoundException();
+            }
+
+            story.Name = storyDto.Name;
             story.Description = storyDto.Description;
             story.Assignee = storyDto.Assignee;
-            story.Subtasks = storyDto.Subtasks;
 
             await _repository.UpdateAsync(story); 
 

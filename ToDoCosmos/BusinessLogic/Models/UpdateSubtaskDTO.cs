@@ -7,12 +7,15 @@ using ToDoCosmos.Domain;
 
 namespace ToDoCosmos.BusinessLogic.Models
 {
-    public class UpdateUserStoryDTO
+    public class UpdateSubtaskDTO
     {
+        public Guid UserStoryId { get; set; }
         public Guid Id { get; set; } 
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid? AssigneeId { get; set; }
-       
+
+
+      
     }
 }

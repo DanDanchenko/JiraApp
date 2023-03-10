@@ -11,11 +11,6 @@ namespace ToDoCosmos.BusinessLogic.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public User Assignee { get; set; }
-        public List<Subtask> Subtasks { get; set; }
-        public string Status { get; set; }
-
-
-
+        
     }
 }
