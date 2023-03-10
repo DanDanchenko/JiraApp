@@ -12,7 +12,6 @@ namespace ToDoCosmos.BusinessLogic.Interfaces
     {
         Task<UserStory> CreateStoryAsync(CreateUserStoryDTO storyDto);
         Task<IEnumerable<UserStory>> GetAllStoriesAsync();
-        Task<IEnumerable<UserStory>> GetAllDoneStoriesAsync();
         Task<UserStory> GetStoryByIdAsync(Guid storyid);
         Task ChangeStatusAsync(Guid storyid, string status);
         Task UpdateStoryAsync(UpdateUserStoryDTO storyDto);

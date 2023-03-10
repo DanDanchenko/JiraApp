@@ -9,10 +9,10 @@ namespace ToDoCosmos.Domain
 {
     public class Subtask
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public User Assignee { get; set; }
-        public string Staatus { get; set; }
+        public User AssigneeId { get; set; }
+        public string Status { get; set; }
     }
 }

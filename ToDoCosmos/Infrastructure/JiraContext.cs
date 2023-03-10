@@ -12,6 +12,7 @@ namespace ToDoCosmos.Infrastructure
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserStory> Stories { get; set; }
+      //  public DbSet <Subtask> Subtasks { get; set; } Думаю, що не потрібно, оскільки у кожного сторі свій набір сабтасків. Поправте будь - ласка, якщо не правий
         
           
 

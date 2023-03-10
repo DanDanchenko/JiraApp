@@ -8,10 +8,10 @@ namespace ToDoCosmos.Domain
 {
     public class UserStory
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public User Assignee { get; set; }
+        public Guid? AssigneeId { get; set; }
         public string Status { get; set; }
         public List<Subtask> Subtasks { get; set; }
     }
