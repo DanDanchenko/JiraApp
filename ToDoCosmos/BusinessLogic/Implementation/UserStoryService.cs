@@ -86,7 +86,7 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             story.Name = storyDto.Name;
             story.Description = storyDto.Description;
-            story.Assignee = storyDto.Assignee;
+            story.AssigneeId = storyDto.AssigneeId;
 
             await _repository.UpdateAsync(story); 
 

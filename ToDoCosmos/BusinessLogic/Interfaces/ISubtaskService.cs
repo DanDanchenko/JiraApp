@@ -10,8 +10,8 @@ namespace ToDoCosmos.BusinessLogic.Interfaces
 {
     public interface ISubtaskService
     {
-        Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDto);
+        Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDto, Guid userStoryId);
         Task ChangeStatusAsync(Guid subtaskid, Guid userStoryId, string status);
-        Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto);
+        Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto, Guid userStoryId);
     }
 }

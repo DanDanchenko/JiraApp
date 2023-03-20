@@ -1,5 +1,10 @@
-﻿/* using Microsoft.EntityFrameworkCore;
+﻿ using Microsoft.EntityFrameworkCore;
 
+static int Main()
+{
+    return 0;
+}
+/*
 using var context = new StoryContext();
 context.Database.EnsureCreated();
 

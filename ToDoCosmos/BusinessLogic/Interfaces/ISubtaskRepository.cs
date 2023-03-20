@@ -10,9 +10,8 @@ namespace ToDoCosmos.BusinessLogic.Interfaces
 {
     public interface ISubtaskRepository
     {
-        Task AddAsync(Subtask subtask);
-        Task<Subtask> GetByIdAsync(Guid Id);
-        Task<IEnumerable<Subtask>> GetAllSubtasksAsync();
-        Task UpdateAsync(Subtask subtask);
+        Task AddAsync(Subtask subtask, Guid userStoryId);
+        Task<IEnumerable<Subtask>> GetAllSubtasksAsync(Guid userStoryId);
+        Task UpdateAsync(Subtask subtask, Guid userStoryId);
     }
 }
