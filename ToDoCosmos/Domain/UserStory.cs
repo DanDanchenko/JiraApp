@@ -13,6 +13,6 @@ namespace ToDoCosmos.Domain
         public string Description { get; set; }
         public Guid? AssigneeId { get; set; }
         public string Status { get; set; }
-        public List<Subtask> Subtasks { get; set; }
+        public ICollection<Subtask> Subtasks { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace ToDoCosmos.BusinessLogic.Implementation
             _repository = repository;
         }
 
-        public async Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDTO)
+        public async Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDTO, Guid usertSoryId)
         {
             var subtask = new Subtask
             {
@@ -30,16 +30,18 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             };
 
-            await _repository.AddAsync(subtask);
+            await _repository.AddAsync(subtask, usertSoryId);
             return subtask;
 
 
         }
 
-      public async Task ChangeStatusAsync(Guid subtaskid, string status)
+      public async Task ChangeStatusAsync(Guid subtaskid, Guid userStoryId, string status)
         {
-           
-            var subtask = await _repository.GetByIdAsync(subtaskid);
+
+            var subtasks = await _repository.GetAllSubtasksAsync(userStoryId);
+            var subtask = subtasks.FirstOrDefault(x => x.Id == subtaskid);
+            
 
             if (subtask is null)
             {
@@ -48,12 +50,13 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             subtask.Status = status;
 
-            await _repository.UpdateAsync(subtask);
+            await _repository.UpdateAsync(subtask, userStoryId);
         }
 
-       public async Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto)
+       public async Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto, Guid userStoryId)
         {
-            var subtask = await _repository.GetByIdAsync(subtaskDto.Id);
+            var subtasks = await _repository.GetAllSubtasksAsync(userStoryId);
+            var subtask = subtasks.FirstOrDefault(x => x.Id == subtaskDto.Id);
 
             if (subtask is null)
             {
@@ -62,9 +65,9 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             subtask.Name = subtaskDto.Name;
             subtask.Description = subtaskDto.Description;
-            subtask.Assignee = subtaskDto.Assignee;
+            subtask.AssigneeId = subtaskDto.AssigneeId;
            
-            await _repository.UpdateAsync(subtask);
+            await _repository.UpdateAsync(subtask, userStoryId);
         }
 
     }

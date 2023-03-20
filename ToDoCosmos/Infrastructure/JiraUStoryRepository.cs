@@ -27,7 +27,7 @@ namespace ToDoCosmos.Infrastructure
                 var userId = _userService.CurrentUserId;
 
                 var assignee = await _context.Users.FirstAsync(x => x.Id.Equals(userId));
-                userStory.Assignee = assignee;
+                userStory.AssigneeId = assignee.Id;
 
                 userStory.Status = "";
 

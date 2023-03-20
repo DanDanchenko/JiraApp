@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoCosmos.Domain
+namespace ToDoCosmos.Infrastructure.Authentication
 {
-    public class User
+    public class AuthenticationUserDTO
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
+
         public string Password { get; set; }
-        
     }
 }
