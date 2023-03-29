@@ -8,7 +8,7 @@ using ToDoCosmos.Domain;
 namespace JiraApi.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/user-stories")]
     [ApiController]
     public class UserStoriesController : ControllerBase
     {
