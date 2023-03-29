@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -7,10 +8,12 @@ using ToDoCosmos.Infrastructure.Authentication;
 
 namespace JiraApi.Controllers
 {
-    [Route("api/[controller]")]
+    
+    [Route("api/user-stories")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        
         private readonly IAuthenticationService _authenticationService;
         private readonly IConfiguration _configuration;
 

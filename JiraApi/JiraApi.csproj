@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ToDoCosmos.Infrastructure.csproj" />
+    <ProjectReference Include="..\ToDoCosmos.BusinessLogic\ToDoCosmos.BusinessLogic.csproj" />
+    <ProjectReference Include="..\ToDoCosmos.Domain\ToDoCosmos.Domain.csproj" />
     <ProjectReference Include="..\ToDoCosmos\ToDoCosmos.csproj" />
   </ItemGroup>
 

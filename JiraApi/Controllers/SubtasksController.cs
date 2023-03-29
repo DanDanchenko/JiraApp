@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using ToDoCosmos.BusinessLogic.Interfaces;
 using ToDoCosmos.BusinessLogic.Models;
 using ToDoCosmos.Domain;
+using ToDoCosmos.BusinessLogic.Models;
 
 namespace JiraApi.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/subtasks")]
     [ApiController]
     public class SubtasksController : ControllerBase
     {
@@ -21,24 +22,24 @@ namespace JiraApi.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Subtask>> CreateSubtaskASync(CreateSubtaskDTO subtaskDTO, Guid userStoryId)
+        public async Task<ActionResult<Subtask>> CreateSubtaskASync(CreateSubtaskDTO subtaskDTO)
         {
-            var createdsubtask = await _service.CreateSubtaskAsync(subtaskDTO, userStoryId);
+            var createdsubtask = await _service.CreateSubtaskAsync(subtaskDTO);
             return Ok(createdsubtask);
         }
 
         [HttpPut("{subtaskid}")]
-        public async Task<ActionResult> ChangeStatusAsync(Guid subtaskid, Guid userStoryId, string status)
+        public async Task<ActionResult> ChangeStatusAsync(ChangeSubtaskStatusDTO subtaskDTO, string status)
         {
-            await _service.ChangeStatusAsync(subtaskid, userStoryId, status);
+            await _service.ChangeStatusAsync(subtaskDTO, status);
             return Ok();
         }
 
         [HttpPut]
 
-        public async Task<ActionResult> UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDTO, Guid userStoryId)
+        public async Task<ActionResult> UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDTO)
         {
-            await _service.UpdateSubtaskAsync(subtaskDTO, userStoryId);
+            await _service.UpdateSubtaskAsync(subtaskDTO);
             return Ok();
         }
 

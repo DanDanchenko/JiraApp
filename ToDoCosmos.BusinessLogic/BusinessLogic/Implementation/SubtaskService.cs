@@ -7,6 +7,7 @@ using ToDoCosmos.BusinessLogic.Interfaces;
 using ToDoCosmos.BusinessLogic.Models;
 using ToDoCosmos.Domain;
 using ToDoCosmos.BusinessLogic.Exceptions;
+using ToDoCosmos.BusinessLogic.Models;
 
 namespace ToDoCosmos.BusinessLogic.Implementation
 {
@@ -19,7 +20,7 @@ namespace ToDoCosmos.BusinessLogic.Implementation
             _repository = repository;
         }
 
-        public async Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDTO, Guid usertSoryId)
+        public async Task<Subtask> CreateSubtaskAsync(CreateSubtaskDTO subtaskDTO)
         {
             var subtask = new Subtask
             {
@@ -30,17 +31,17 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             };
 
-            await _repository.AddAsync(subtask, usertSoryId);
+            await _repository.AddAsync(subtask, subtaskDTO.UserStoryId);
             return subtask;
 
 
         }
 
-      public async Task ChangeStatusAsync(Guid subtaskid, Guid userStoryId, string status)
+      public async Task ChangeStatusAsync(ChangeSubtaskStatusDTO subtaskDTO, string status)
         {
 
-            var subtasks = await _repository.GetAllSubtasksAsync(userStoryId);
-            var subtask = subtasks.FirstOrDefault(x => x.Id == subtaskid);
+            var subtasks = await _repository.GetAllSubtasksAsync(subtaskDTO.UserStoryId);
+            var subtask = subtasks.FirstOrDefault(x => x.Id == subtaskDTO.Id);
             
 
             if (subtask is null)
@@ -50,12 +51,12 @@ namespace ToDoCosmos.BusinessLogic.Implementation
 
             subtask.Status = status;
 
-            await _repository.UpdateAsync(subtask, userStoryId);
+            await _repository.UpdateAsync(subtask, subtaskDTO.UserStoryId);
         }
 
-       public async Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto, Guid userStoryId)
+       public async Task UpdateSubtaskAsync(UpdateSubtaskDTO subtaskDto)
         {
-            var subtasks = await _repository.GetAllSubtasksAsync(userStoryId);
+            var subtasks = await _repository.GetAllSubtasksAsync(subtaskDto.UserStoryId);
             var subtask = subtasks.FirstOrDefault(x => x.Id == subtaskDto.Id);
 
             if (subtask is null)
@@ -67,7 +68,7 @@ namespace ToDoCosmos.BusinessLogic.Implementation
             subtask.Description = subtaskDto.Description;
             subtask.AssigneeId = subtaskDto.AssigneeId;
            
-            await _repository.UpdateAsync(subtask, userStoryId);
+            await _repository.UpdateAsync(subtask, subtaskDto.UserStoryId);
         }
 
     }
